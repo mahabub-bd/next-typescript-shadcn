@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "React",
     "Frontend Template",
   ],
-  author: "Techqul",
+
   openGraph: {
     title: "Next.js Template - TypeScript & Tailwind CSS",
     description:
