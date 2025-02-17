@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="bg-gradient-to-r from-blue-200 via-purple-200 to-indigo-200">
+    <section className="bg-linear-to-r from-blue-200 via-purple-200 to-indigo-200">
       <div className=" container mx-auto flex flex-col items-center justify-center h-[30vh] ">
         <h1 className="text-4xl font-bold text-red-600">
           404 - Page Not Found

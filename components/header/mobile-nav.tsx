@@ -1,47 +1,56 @@
 "use client";
-
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { navLinks, services } from "@/constants/data";
-import { NavLink } from "@/types/types";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/public";
-
+import { aboutItems, navLinks, services } from "@/constants/data";
+import { AboutItem, NavLink, Service } from "@/types/types";
 import { ChevronDownIcon, MenuIcon } from "lucide-react";
 
 export default function MobileNavigation() {
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleSubMenu = (id: number) => {
     setOpenSubMenu(openSubMenu === id ? null : id);
   };
 
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+    setOpenSubMenu(null); // Close any open submenu
+  };
+
   return (
-    <Sheet>
+    <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="md:hidden  ">
-          <MenuIcon className="h-6 w-6 text-primary shadow-xl" />
+        <Button variant="outline" size="icon" className="lg:hidden">
+          <MenuIcon className="h-6 w-6  bg-transparent" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right">
-        <Image src={Logo} alt="logo" width={80} />
+        <SheetTitle className="sr-only">Menu</SheetTitle>
+        <Image src={Logo} alt="logo" width={60} />
         <div className="flex flex-col items-start gap-4 p-6">
-          {navLinks.map((link: NavLink) => (
+          {navLinks?.map((link: NavLink) => (
             <div key={link.id} className="w-full">
-              {link.subMenu ? (
+              {link?.subMenu ? (
                 <>
                   <button
                     className="text-lg font-medium hover:underline w-full text-left flex items-center justify-between"
                     onClick={() => toggleSubMenu(link.id)}
                   >
                     {link.text}
-
                     <motion.div
                       initial={{ rotate: 0 }}
                       animate={{ rotate: openSubMenu === link.id ? 180 : 0 }}
@@ -52,17 +61,35 @@ export default function MobileNavigation() {
                   </button>
                   {openSubMenu === link.id && (
                     <ul className="pl-4 mt-2 space-y-2">
-                      {services.map((service) => (
-                        <li key={service.id}>
-                          <Link
-                            href={`/service/${service.slug}`}
-                            className="text-md font-normal hover:underline"
-                            prefetch={false}
-                          >
-                            {service.title}
-                          </Link>
-                        </li>
-                      ))}
+                      {link.text === "Services" &&
+                        services?.map((service: Service) => (
+                          <li key={service.id}>
+                            <Link
+                              href={`/service/${service.slug}`}
+                              className="text-md font-normal hover:underline"
+                              prefetch={false}
+                              onClick={handleCloseDrawer}
+                            >
+                              {service.title}
+                            </Link>
+                          </li>
+                        ))}
+                      {link.text === "About Us" && (
+                        <ul className="pl-4 mt-2 space-y-2">
+                          {aboutItems?.map((aboutLink: AboutItem) => (
+                            <li key={aboutLink.id}>
+                              <Link
+                                href={aboutLink.href}
+                                className="text-md font-normal hover:underline"
+                                prefetch={false}
+                                onClick={handleCloseDrawer}
+                              >
+                                {aboutLink.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </ul>
                   )}
                 </>
@@ -71,6 +98,7 @@ export default function MobileNavigation() {
                   href={link.path}
                   className="text-lg font-medium hover:underline"
                   prefetch={false}
+                  onClick={handleCloseDrawer}
                 >
                   {link.text}
                 </Link>

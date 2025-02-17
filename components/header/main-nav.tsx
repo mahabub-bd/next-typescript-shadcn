@@ -1,69 +1,61 @@
-"use client";
-
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { navLinks, services } from "@/constants/data";
-import { NavLink, Service } from "@/types/types";
-
+import { navLinks } from "@/constants/data";
 import Link from "next/link";
-import React from "react";
 
-const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
-  ({ className, title, href, ...props }, ref) => (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          href={href}
-          className={`block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:text-accent-foreground focus:text-accent-foreground ${className}`}
-          {...props}
-        >
-          <div className="text-base font-medium leading-none">{title}</div>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-);
-ListItem.displayName = "ListItem";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-interface ListItemProps {
-  className?: string;
-  title: string;
-  href: string;
-}
-
-const ServiceSubMenu = () => (
-  <ul className="grid w-[200px] gap-1 p-2">
-    {services.map((service: Service) => (
-      <ListItem
-        key={service.id}
-        title={service.title}
-        href={`/service/${service.slug}`}
-      />
-    ))}
-  </ul>
-);
+import { useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
+import ServicesMenu from "./services-menu";
+import AboutMenu from "./about-menu";
 
 export function MainNavigation() {
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+
+  const handleOpenChange = (menuName: string | null) => {
+    setOpenMenu(menuName);
+  };
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {navLinks.map((navItem: NavLink) => (
+        {navLinks.map((navItem) => (
           <NavigationMenuItem key={navItem.id}>
             {navItem.subMenu ? (
-              <>
-                <NavigationMenuTrigger>{navItem.text}</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ServiceSubMenu />
-                </NavigationMenuContent>
-              </>
+              <DropdownMenu
+                open={openMenu === navItem.text}
+                onOpenChange={(open: any) =>
+                  handleOpenChange(open ? navItem.text : null)
+                }
+              >
+                <DropdownMenuTrigger asChild>
+                  <span
+                    className={`px-4 py-2 font-medium flex items-center space-x-1 cursor-pointer`}
+                  >
+                    <span>{navItem.text}</span>
+                    <ChevronDownIcon className="w-5 h-5" aria-hidden="true" />
+                  </span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {navItem.text === "Services" ? (
+                    <ServicesMenu
+                      closeDropdown={() => handleOpenChange(null)}
+                    />
+                  ) : navItem.text === "About Us" ? (
+                    <AboutMenu closeDropdown={() => handleOpenChange(null)} />
+                  ) : null}
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <Link href={navItem.path} passHref legacyBehavior>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>

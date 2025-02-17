@@ -26,3 +26,9 @@ export interface SocialLink {
   href: string;
   icon: LucideIcon;
 }
+
+export interface AboutItem {
+  id: number;
+  title: string;
+  href: string;
+}

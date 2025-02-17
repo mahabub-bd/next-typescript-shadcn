@@ -1,4 +1,4 @@
-import { NavLink, Service, SocialLink } from "@/types/types";
+import { AboutItem, NavLink, Service, SocialLink } from "@/types/types";
 import { FacebookIcon, LinkedinIcon, Twitter } from "lucide-react";
 
 export const services: Service[] = [
@@ -56,8 +56,8 @@ export const services: Service[] = [
 
 export const navLinks: NavLink[] = [
   { id: 1, path: "/", text: "Home" },
+  { id: 2, path: "/about-us", text: "About Us", subMenu: true },
   { id: 3, path: "/service", text: "Services", subMenu: true },
-  { id: 2, path: "/about-us", text: "About Us" },
   { id: 6, path: "/clients", text: "Clients" },
   { id: 4, path: "/blogs", text: "Blog" },
   { id: 5, path: "/contact-us", text: "Contact Us" },
@@ -71,4 +71,10 @@ export const socialLinks: SocialLink[] = [
   },
   { id: 2, href: "https://twitter.com", icon: Twitter },
   { id: 3, href: "https://linkedin.com", icon: LinkedinIcon },
+];
+
+export const aboutItems: AboutItem[] = [
+  { id: 1, title: "About Allround", href: "/about-allround" },
+  { id: 2, title: "Mission & Vision", href: "/mission-vision" },
+  { id: 3, title: "Our Team", href: "/our-team" },
 ];
