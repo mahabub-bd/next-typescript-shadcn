@@ -34,7 +34,7 @@ export function MainNavigation() {
             {navItem.subMenu ? (
               <DropdownMenu
                 open={openMenu === navItem.text}
-                onOpenChange={(open: any) =>
+                onOpenChange={(open) =>
                   handleOpenChange(open ? navItem.text : null)
                 }
               >
