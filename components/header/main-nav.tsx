@@ -18,6 +18,7 @@ import { useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
 import ServicesMenu from "./services-menu";
 import AboutMenu from "./about-menu";
+import { ModeToggle } from "../theme/theme-toggle";
 
 export function MainNavigation() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -66,6 +67,8 @@ export function MainNavigation() {
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
+
+      <ModeToggle />
     </NavigationMenu>
   );
 }

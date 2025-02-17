@@ -7,7 +7,7 @@ import MobileNavigation from "./mobile-nav";
 
 function Navbar() {
   return (
-    <div className="bg-white sticky top-0 z-40 shadow-md  md:px-0 px-4">
+    <div className="bg-white dark:bg-accent sticky top-0 z-40 shadow-md dark:shadow-gray-800 md:px-0 px-4">
       <nav className="container mx-auto">
         <div className="flex flex-wrap items-center justify-between w-full py-1">
           <Link href="/" className="py-2">

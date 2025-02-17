@@ -1,6 +1,5 @@
 import { NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { services } from "@/constants/data";
-
 import Link from "next/link";
 import React from "react";
 
@@ -23,11 +22,13 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
           passHref
           ref={ref}
           href={href}
-          className={`block select-none rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:text-accent-foreground focus:text-accent-foreground ${className}`}
+          className={`block select-none rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:text-accent-foreground focus:text-accent-foreground dark:hover:text-dark-accent-foreground dark:focus:text-dark-accent-foreground ${className}`}
           onClick={onClick}
           {...props}
         >
-          <div className="text-base font-medium leading-none">{title}</div>
+          <div className="text-base font-medium leading-none dark:text-gray-200">
+            {title}
+          </div>
         </Link>
       </NavigationMenuLink>
     </li>
@@ -37,7 +38,7 @@ ListItem.displayName = "ListItem";
 
 const ServicesMenu = ({ closeDropdown }: ServiceMenuProps) => {
   return (
-    <ul className="grid w-full md:w-[220px] gap-2 p-3">
+    <ul className="grid w-full md:w-[220px] gap-2 p-3 dark:bg-accent  ">
       {services.length > 0 ? (
         services.map((service) => (
           <ListItem
@@ -48,7 +49,9 @@ const ServicesMenu = ({ closeDropdown }: ServiceMenuProps) => {
           />
         ))
       ) : (
-        <li className="p-3 text-gray-500">No services available.</li>
+        <li className="p-3 text-gray-500 dark:text-gray-400">
+          No services available.
+        </li>
       )}
     </ul>
   );
