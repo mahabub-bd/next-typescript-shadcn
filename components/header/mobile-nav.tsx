@@ -16,7 +16,6 @@ import { Logo } from "@/public";
 import { aboutItems, navLinks, services } from "@/constants/data";
 import { AboutItem, NavLink, Service } from "@/types/types";
 import { ChevronDownIcon, MenuIcon } from "lucide-react";
-import { ModeToggle } from "../theme/theme-toggle";
 
 export default function MobileNavigation() {
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null);
