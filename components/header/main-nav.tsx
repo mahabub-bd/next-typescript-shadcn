@@ -67,8 +67,6 @@ export function MainNavigation() {
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
-
-      <ModeToggle />
     </NavigationMenu>
   );
 }

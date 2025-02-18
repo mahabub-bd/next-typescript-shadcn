@@ -66,7 +66,7 @@ export const navLinks: NavLink[] = [
 export const socialLinks: SocialLink[] = [
   {
     id: 1,
-    href: "https://www.facebook.com/profile.php?id=61560270515036",
+    href: "https://facebook.com",
     icon: FacebookIcon,
   },
   { id: 2, href: "https://twitter.com", icon: Twitter },
@@ -74,7 +74,7 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const aboutItems: AboutItem[] = [
-  { id: 1, title: "About Allround", href: "/about-allround" },
+  { id: 1, title: "About Us", href: "/about-us" },
   { id: 2, title: "Mission & Vision", href: "/mission-vision" },
   { id: 3, title: "Our Team", href: "/our-team" },
 ];

@@ -16,7 +16,7 @@ export function ModeToggle() {
   return (
     <Button
       variant="outline"
-      size="icon"
+      size="sm"
       className="focus-visible:ring-offset-0"
       onClick={toggleTheme}
       aria-label="Toggle theme"

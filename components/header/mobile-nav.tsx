@@ -16,6 +16,7 @@ import { Logo } from "@/public";
 import { aboutItems, navLinks, services } from "@/constants/data";
 import { AboutItem, NavLink, Service } from "@/types/types";
 import { ChevronDownIcon, MenuIcon } from "lucide-react";
+import { ModeToggle } from "../theme/theme-toggle";
 
 export default function MobileNavigation() {
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null);
@@ -33,14 +34,17 @@ export default function MobileNavigation() {
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="lg:hidden">
-          <MenuIcon className="h-6 w-6  bg-transparent" />
+        <Button variant="outline" size="sm" className="lg:hidden">
+          <MenuIcon className="h-5 w-5  bg-transparent" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right">
         <SheetTitle className="sr-only">Menu</SheetTitle>
-        <Image src={Logo} alt="logo" width={60} />
+        <div className="flex justify-between items-center">
+          <Image src={Logo} alt="logo" width={60} />
+        </div>
+
         <div className="flex flex-col items-start gap-4 p-6">
           {navLinks?.map((link: NavLink) => (
             <div key={link.id} className="w-full">
